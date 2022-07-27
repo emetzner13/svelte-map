@@ -1,0 +1,27 @@
+:root {
+	--color-primary: #0ea5e9;
+	--color-secondary: #9ca3af;
+	--color-tertiary: #d1d5db;
+	--color-gray-1: #374151;
+	--color-gray-2: #1f2937;
+	--color-gray-3: #111827;
+}
+
+*,
+*::before,
+*::after {
+	padding: 0;
+	margin: 0;
+	box-sizing: inherit;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	background-color: var(--color-gray-3);
+	box-shadow: 10px 10px 10px rgba(0, 0, 0);
+	box-sizing: border-box;
+}
