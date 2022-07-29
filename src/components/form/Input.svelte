@@ -2,10 +2,20 @@
 	export let type = 'text';
 	export let name = 'name';
 	export let placeholder = null;
-	export let required = null;
+	export let value = null;
+	export let disabled = false;
+	export let required = false;
 </script>
 
-<input {type} {placeholder} {name} {required} />
+<input
+	{type}
+	{placeholder}
+	{name}
+	{value}
+	{disabled}
+	{required}
+	on:input={(e) => (value = e.target.value)}
+/>
 
 <style>
 	input {
@@ -21,5 +31,9 @@
 
 	input:focus {
 		outline: none;
+	}
+
+	input:disabled {
+		cursor: not-allowed;
 	}
 </style>

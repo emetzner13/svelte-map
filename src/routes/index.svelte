@@ -1,16 +1,39 @@
-<script>
-	import Input from '$components/form/Input.svelte';
-	import Button from '../components/form/Button.svelte';
-	import Form from '../components/form/Form.svelte';
+<script context="module">
+	import { userStore } from '$lib/stores/user';
 
-	function onSubmit() {
-		alert('submitted');
-	}
+	export const load = async () => {
+		let user = null;
+
+		userStore.subscribe((currentUser) => (user = currentUser));
+
+		if (user === null) {
+			return {
+				status: 307,
+				redirect: '/not-allowed'
+			};
+		}
+
+		return {
+			props: {
+				user: user
+			}
+		};
+	};
 </script>
 
-<Form on:submit={onSubmit} title="Request Access">
-	<Input type="email" name="email" placeholder="Email Address" required />
-	<Input type="password" name="password" placeholder="Password" required />
-	<Input type="password" name="password" placeholder="Confirm Password" required />
-	<Button type="submit">Request Access</Button>
-</Form>
+<script>
+	export let user;
+
+	console.log(user);
+</script>
+
+<h1>Welcome to the protected page</h1>
+
+<style>
+	h1 {
+		color: white;
+		font-size: 24px;
+		box-shadow: none;
+		width: max-content;
+	}
+</style>

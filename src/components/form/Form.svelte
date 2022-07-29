@@ -1,5 +1,9 @@
+<script>
+	export let title;
+</script>
+
 <form on:submit|preventDefault>
-	<h1>Request Access</h1>
+	<h1>{title}</h1>
 	<slot />
 </form>
 
@@ -16,6 +20,7 @@
 		padding: 10px 40px;
 		border-radius: 8px;
 		background-color: var(--color-gray-2);
+		box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
 	}
 
 	form h1 {

@@ -1,8 +1,9 @@
 <script>
 	export let type = 'button';
+	export let disabled = false;
 </script>
 
-<button {type}><slot /></button>
+<button {type} {disabled}><slot /></button>
 
 <style>
 	button {
@@ -16,5 +17,9 @@
 		font-size: 17px;
 		cursor: pointer;
 		margin: 20px 0;
+	}
+
+	button:disabled {
+		cursor: not-allowed;
 	}
 </style>
