@@ -1,8 +1,25 @@
+<script context="module">
+	export const load = async ({ stuff }) => {
+		let { user } = stuff;
+
+		if (user) {
+			return {
+				redirect: '/',
+				status: 302
+			};
+		}
+
+		return {
+			props: {}
+		};
+	};
+</script>
+
 <script>
 	import Input from '$components/form/Input.svelte';
 	import Button from '../components/form/Button.svelte';
 	import Form from '../components/form/Form.svelte';
-	import { signUp } from '$lib/firebase/firebase';
+	import { signUp } from '$lib/client/firebase';
 	import { goto } from '$app/navigation';
 
 	let email = '',

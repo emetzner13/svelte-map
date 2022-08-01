@@ -1,8 +1,26 @@
+<script context="module">
+	export const load = async ({ stuff }) => {
+		// let { user } = stuff;
+
+		// if (user) {
+		// 	return {
+		// 		redirect: '/',
+		// 		status: 302
+		// 	};
+		// }
+
+		return {
+			props: {}
+		};
+	};
+</script>
+
 <script>
 	import Input from '$components/form/Input.svelte';
 	import Button from '../components/form/Button.svelte';
 	import Form from '../components/form/Form.svelte';
-	import { signIn } from '$lib/firebase/firebase';
+	import { signIn } from '$lib/client/firebase';
+	import { goto } from '$app/navigation';
 
 	let email = '',
 		password = '',
@@ -26,6 +44,7 @@
 		try {
 			await signIn(email, password);
 		} catch (error) {
+			console.log(error);
 			alert(errorMsg[error.code] || 'Something went wrong');
 
 			loading = false;
@@ -33,6 +52,7 @@
 		}
 
 		goto('/');
+
 		loading = false;
 	}
 </script>

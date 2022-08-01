@@ -1,16 +1,8 @@
 <script context="module">
-	import { userStore } from '$lib/stores/user';
-
-	export const load = async () => {
-		let user = null;
-
-		userStore.subscribe((currentUser) => (user = currentUser));
-
-		if (user === null) {
-			return {
-				status: 307,
-				redirect: '/not-allowed'
-			};
+	export const load = async ({ stuff }) => {
+		let { user } = stuff;
+		if (!user.approved) {
+			return { redirect: '/access-denied', status: 302 };
 		}
 
 		return {
@@ -22,12 +14,20 @@
 </script>
 
 <script>
-	export let user;
+	import { signOut } from '$lib/client/firebase';
+	import { goto } from '$app/navigation';
 
-	console.log(user);
+	async function logOut() {
+		await signOut();
+
+		goto('/login');
+		console.log('logged out');
+	}
 </script>
 
 <h1>Welcome to the protected page</h1>
+
+<button on:click={logOut}>Signout</button>
 
 <style>
 	h1 {
