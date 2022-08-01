@@ -1,13 +1,13 @@
 <script context="module">
 	export const load = async ({ stuff }) => {
-		// let { user } = stuff;
+		let { user } = stuff;
 
-		// if (user) {
-		// 	return {
-		// 		redirect: '/',
-		// 		status: 302
-		// 	};
-		// }
+		if (user) {
+			return {
+				redirect: '/',
+				status: 302
+			};
+		}
 
 		return {
 			props: {}
