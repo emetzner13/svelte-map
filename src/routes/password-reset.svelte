@@ -33,5 +33,5 @@
 		required
 	/>
 
-	<Button type="submit">Log in</Button>
+	<Button type="submit">Send Email</Button>
 </Form>
