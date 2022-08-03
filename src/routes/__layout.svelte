@@ -19,13 +19,19 @@
 			}
 		}
 		return {
-			stuff: { user }
+			stuff: { user },
+			props: { user }
 		};
 	};
 </script>
 
 <script>
 	import './style.css';
+	import Layout from '$components/Layout.svelte';
+
+	export let user;
 </script>
 
-<slot />
+<Layout {user}>
+	<slot />
+</Layout>

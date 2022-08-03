@@ -6,8 +6,8 @@ function checkUser() {
 
 	return {
 		subscribe: subscribe,
-		set: (user) => set(localStorage.setItem('user', JSON.stringify(user))),
-		update: (updatedUser) => update(() => updatedUser)
+		set: (user) => set(user && localStorage.setItem('user', JSON.stringify(user))),
+		delete: () => set(localStorage.removeItem('user'))
 	};
 }
 

@@ -32,7 +32,13 @@ export const GET = async ({ request }) => {
 
 	if (!token) return { status: 401 };
 
-	const decodedToken = await decodeToken(token);
+	let decodedToken;
+
+	try {
+		decodedToken = await decodeToken(token);
+	} catch (error) {
+		return { status: 401 };
+	}
 
 	if (!decodedToken) return { status: 401 };
 

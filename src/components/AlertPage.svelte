@@ -11,8 +11,9 @@
 <style>
 	#notfound {
 		position: relative;
-		height: 100vh;
+		height: calc(100vh - 4rem);
 	}
+
 	#notfound .notfound {
 		position: absolute;
 		left: 50%;
@@ -21,12 +22,14 @@
 		-ms-transform: translate(-50%, -50%);
 		transform: translate(-50%, -50%);
 	}
+
 	.notfound {
 		max-width: 520px;
 		width: 100%;
 		line-height: 1.4;
 		text-align: center;
 	}
+
 	.notfound .notfound-404 {
 		position: relative;
 		height: 240px;
@@ -48,9 +51,11 @@
 		letter-spacing: -40px;
 		margin-left: -20px;
 	}
+
 	:global(.notfound .notfound-404 h1 > span) {
 		text-shadow: -8px 0 0 var(--color-secondary);
 	}
+
 	:global(.notfound .notfound-404 h3) {
 		font-family: cabin, sans-serif;
 		position: relative;
@@ -62,6 +67,7 @@
 		letter-spacing: 3px;
 		padding-left: 6px;
 	}
+
 	:global(.notfound h2) {
 		font-family: cabin, sans-serif;
 		font-size: 20px;
@@ -71,23 +77,28 @@
 		margin-top: 0;
 		margin-bottom: 25px;
 	}
+
 	@media only screen and (max-width: 767px) {
 		.notfound .notfound-404 {
 			height: 200px;
 		}
+
 		:global(.notfound .notfound-404 h1) {
-			font-size: 200px;
+			font-size: 180px;
 		}
 	}
+
 	@media only screen and (max-width: 480px) {
 		.notfound .notfound-404 {
 			height: 162px;
 		}
+
 		:global(.notfound .notfound-404 h1) {
-			font-size: 162px;
-			height: 150px;
-			line-height: 162px;
+			font-size: 130px;
+			height: 130px;
+			line-height: 130px;
 		}
+
 		:global(.notfound h2) {
 			font-size: 16px;
 		}

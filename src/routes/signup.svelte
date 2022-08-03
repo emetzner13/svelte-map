@@ -17,8 +17,8 @@
 
 <script>
 	import Input from '$components/form/Input.svelte';
-	import Button from '../components/form/Button.svelte';
-	import Form from '../components/form/Form.svelte';
+	import Button from '$components/form/Button.svelte';
+	import Form from '$components/form/Form.svelte';
 	import { signUp } from '$lib/client/firebase';
 	import { goto } from '$app/navigation';
 
@@ -28,7 +28,8 @@
 		loading = false;
 
 	let errorMsg = {
-		'auth/email-already-in-use': 'Email already in use.'
+		'auth/email-already-in-use': 'Email already in use.',
+		'auth/network-request-failed': 'Please check your network connection'
 	};
 
 	async function onSubmit() {

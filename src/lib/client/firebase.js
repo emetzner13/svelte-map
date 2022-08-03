@@ -5,11 +5,14 @@ import {
 	getAuth,
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
-	signOut as _signOut
+	signOut as _signOut,
+	getIdToken,
+	sendPasswordResetEmail
 } from 'firebase/auth';
 import { FIREBASE_CLIENT_CONFIG } from '$env/static/private';
 import { browser } from '$app/env';
-import { userStore } from '../stores/user';
+import { goto } from '$app/navigation';
+import { userStore } from '../stores/userStore';
 import { fetchHandler } from './fetch';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -58,8 +61,8 @@ export const signUp = async (email, password) => {
 
 	user = await saveDocument(userCredentials.user.uid, user);
 
-	await fetchHandler('/api/token', { token: userCredentials._tokenResponse.idToken });
-
+	const token = await getIdToken(userCredentials.user, true);
+	await fetchHandler('/api/token', { token });
 	userStore.set(user);
 
 	return user;
@@ -70,7 +73,8 @@ export const signIn = async (email, password) => {
 
 	let user = await getDocument(userCredentials.user.uid);
 
-	await fetchHandler('/api/token', { token: userCredentials._tokenResponse.idToken });
+	const token = await getIdToken(userCredentials.user, true);
+	await fetchHandler('/api/token', { token });
 	userStore.set(user);
 
 	return user;
@@ -80,4 +84,20 @@ export async function signOut() {
 	const auth = getAuth(app);
 	await _signOut(auth);
 	await fetchHandler('/api/logout', { token: null });
+	userStore.delete();
+
+	goto('/login');
+}
+
+export async function resetPassword(email) {
+	try {
+		await sendPasswordResetEmail(auth, email);
+
+		return 'Password reset email send to your account';
+	} catch (error) {
+		if (error.code === 'auth/user-not-found') {
+			return 'Email not found';
+		}
+		return 'Something went wrong';
+	}
 }

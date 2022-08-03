@@ -28,7 +28,8 @@
 
 	let errorMsg = {
 		'auth/user-not-found': "Email doesn't exist",
-		'auth/wrong-password': 'Password is incorrect'
+		'auth/wrong-password': 'Password is incorrect',
+		'auth/network-request-failed': 'Please check your network connection'
 	};
 
 	async function onSubmit() {
