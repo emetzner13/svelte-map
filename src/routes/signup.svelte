@@ -57,7 +57,6 @@
 			return;
 		}
 
-		goto('/');
 		loading = false;
 	}
 </script>

@@ -1,7 +1,6 @@
 <script context="module">
 	export const load = async ({ session }) => {
 		let { user } = session;
-		// if (!user) return { status: 401 };
 		if (user?.approved) return { redirect: '/', status: 308 };
 
 		return { props: {} };
@@ -10,14 +9,6 @@
 
 <script>
 	import AlertPage from '$components/AlertPage.svelte';
-	import { signOut } from '$lib/client/firebase';
-	import { goto } from '$app/navigation';
-
-	async function logOut() {
-		signOut();
-
-		goto('/login');
-	}
 </script>
 
 <AlertPage>

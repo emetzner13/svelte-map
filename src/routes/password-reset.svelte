@@ -9,16 +9,12 @@
 
 	async function onSubmit() {
 		loading = true;
-
 		if (!email.includes('@')) {
 			alert('Invalid fields');
 			loading = false;
-
 			return;
 		}
-
 		let message = await resetPassword(email);
-
 		alert(message);
 	}
 </script>

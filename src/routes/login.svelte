@@ -43,9 +43,7 @@
 			return;
 		}
 
-		await goto('/');
 		loading = false;
-
 		return;
 	}
 </script>

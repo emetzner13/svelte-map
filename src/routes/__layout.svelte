@@ -4,8 +4,6 @@
 	import { protectedPages } from '$lib/client/constants';
 
 	export const load = async ({ session, url }) => {
-		// let response = await fetch('/api/token');
-		// let { user } = await response.json();
 		if (!session.user && protectedPages.has(url.pathname)) {
 			return { redirect: '/login', status: 302 };
 		}
@@ -17,10 +15,8 @@
 				console.error(ex);
 			}
 		}
-		return {
-			// stuff: { user },
-			// props: { user }
-		};
+
+		return {};
 	};
 </script>
 

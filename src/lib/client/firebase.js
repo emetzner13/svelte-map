@@ -88,25 +88,21 @@ export const getDocument = async (docId) => {
 	let docSnap = await getDoc(docRef);
 
 	let docData = { _id: docSnap.id, ...docSnap.data() };
-
 	return docData;
 };
 
 export const signUp = async (email, password) => {
 	let userCredentials = await createUserWithEmailAndPassword(auth, email, password);
-	let user = {
-		email: email,
-		approved: false,
-		createdAt: serverTimestamp()
-	};
+	let user = { email: email, approved: false, createdAt: serverTimestamp() };
 
 	user = await saveDocument(userCredentials.user.uid, user);
 
 	const token = await getIdToken(userCredentials.user, true);
 	await setToken(token);
-	userStore.set(user);
 
+	userStore.set(user);
 	await goto('/');
+
 	return user;
 };
 
@@ -116,9 +112,10 @@ export const signIn = async (email, password) => {
 
 	const token = await getIdToken(userCredentials.user, true);
 	await setToken(token);
-	userStore.set(user);
 
+	userStore.set(user);
 	await goto('/');
+
 	return user;
 };
 
@@ -126,9 +123,8 @@ export async function signOut() {
 	const auth = getAuth(app);
 	await _signOut(auth);
 	await setToken('');
-	userStore.delete();
-
 	await goto('/login');
+	userStore.delete();
 }
 
 export async function resetPassword(email) {
