@@ -27,22 +27,19 @@ export const POST = async ({ request }) => {
 
 export const GET = async ({ request }) => {
 	const cookies = cookie.parse(request.headers.get('cookie') || '');
-
 	let token = cookies.token;
-
 	if (!token) return { status: 401 };
 
-	let decodedToken;
+	let decodedToken = await decodeToken(token);
+	if (!decodedToken) return { status: 401 };
+	if (decodedToken?.errorInfo?.code === 'auth/id-token-expired') return { status: 401 };
 
+	let userData;
 	try {
-		decodedToken = await decodeToken(token);
+		userData = await getUser(decodedToken.uid);
 	} catch (error) {
 		return { status: 401 };
 	}
-
-	if (!decodedToken) return { status: 401 };
-
-	let userData = await getUser(decodedToken.uid);
 
 	return {
 		body: {

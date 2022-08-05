@@ -12,6 +12,8 @@ function initializeFirebase() {
 	}
 }
 
+export { admin };
+
 export async function decodeToken(token) {
 	if (!token || token === 'null' || token === 'undefined') return null;
 	try {
