@@ -1,6 +1,7 @@
 <script>
 	import { signOut } from '$lib/client/firebase';
-	export let user = null;
+	import { session } from '$app/stores';
+	$: ({ user } = $session);
 </script>
 
 <header class="header">

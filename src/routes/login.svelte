@@ -1,17 +1,9 @@
 <script context="module">
-	export const load = async ({ stuff }) => {
-		let { user } = stuff;
+	export const load = async ({ session }) => {
+		let { user } = session;
+		if (user) return { redirect: '/', status: 302 };
 
-		if (user) {
-			return {
-				redirect: '/',
-				status: 302
-			};
-		}
-
-		return {
-			props: {}
-		};
+		return { props: {} };
 	};
 </script>
 
@@ -45,16 +37,16 @@
 		try {
 			await signIn(email, password);
 		} catch (error) {
-			console.log(error);
 			alert(errorMsg[error.code] || 'Something went wrong');
-
 			loading = false;
+
 			return;
 		}
 
-		goto('/');
-
+		await goto('/');
 		loading = false;
+
+		return;
 	}
 </script>
 

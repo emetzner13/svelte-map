@@ -1,15 +1,9 @@
 <script context="module">
-	export const load = async ({ stuff }) => {
-		let { user } = stuff;
-		if (!user.approved) {
-			return { redirect: '/access-denied', status: 302 };
-		}
+	export const load = async ({ session }) => {
+		let { user } = session;
+		if (!user.approved) return { redirect: '/access-denied', status: 302 };
 
-		return {
-			props: {
-				user: user
-			}
-		};
+		return { props: { user: user } };
 	};
 </script>
 

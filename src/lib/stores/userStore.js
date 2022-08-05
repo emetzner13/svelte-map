@@ -2,7 +2,7 @@ import { browser } from '$app/env';
 import { writable } from 'svelte/store';
 
 function checkUser() {
-	const { subscribe, set, update } = writable(browser && JSON.parse(localStorage.getItem('user')));
+	const { subscribe, set } = writable(browser && JSON.parse(localStorage.getItem('user')));
 
 	return {
 		subscribe: subscribe,

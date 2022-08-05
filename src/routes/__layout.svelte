@@ -3,11 +3,10 @@
 	import { initializeFirebase } from '$lib/client/firebase';
 	import { protectedPages } from '$lib/client/constants';
 
-	export const load = async function load({ url, fetch }) {
-		let response = await fetch('/api/token');
-		let { user } = await response.json();
-
-		if (!user && protectedPages.has(url.pathname)) {
+	export const load = async ({ session, url }) => {
+		// let response = await fetch('/api/token');
+		// let { user } = await response.json();
+		if (!session.user && protectedPages.has(url.pathname)) {
 			return { redirect: '/login', status: 302 };
 		}
 
@@ -19,8 +18,8 @@
 			}
 		}
 		return {
-			stuff: { user },
-			props: { user }
+			// stuff: { user },
+			// props: { user }
 		};
 	};
 </script>
@@ -28,10 +27,8 @@
 <script>
 	import './style.css';
 	import Layout from '$components/Layout.svelte';
-
-	export let user;
 </script>
 
-<Layout {user}>
+<Layout>
 	<slot />
 </Layout>

@@ -1,6 +1,6 @@
 <script context="module">
-	export const load = async ({ stuff }) => {
-		let { user } = stuff;
+	export const load = async ({ session }) => {
+		let { user } = session;
 
 		if (user) {
 			return {
